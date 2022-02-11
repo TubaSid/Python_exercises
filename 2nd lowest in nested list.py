@@ -1,34 +1,40 @@
+# Who has the second lowest marks?
+
+name=[]
+score=[]
+for i in range(int(input("Enter number of students: "))):
+        name.append(input("Enter name: "))
+        score.append(float(input("Enter score: ")))
+
 l=0
+n=len(name)
 idx=0
 index=0
 sort=[]
-nested_list=[]
-for i in range(int(input("Enter no. of students: "))):
-        name=(input("Enter name: "))
-        score=(float(input("Enter score:")))
-        nested_list.append([name,score])
-n=len(nested_list)
+
 for i in range(n):
     for j in range(i):
-        if nested_list[i][1]>nested_list[j][1]:
-            c=nested_list[i]
-            nested_list[i]=nested_list[j]
-            nested_list[j]=c
-nested_list.reverse()
+        if score[i]<score[j]:
+            c=score[i]
+            score[i]=score[j]
+            score[j]=c
+            p=name[i]
+            name[i]=name[j]
+            name[j]=p
 for i in range(n):
     for j in range(i):
         if l<1:
-            if nested_list[0][1]!=nested_list[i][1]:
+            if score[0]!=score[i:i+1]:
                 l+=1
                 idx=i
-                v=nested_list[i][1];
-        if nested_list[idx][1]==nested_list[i][1]:
-            index=i
-if nested_list[idx][1]==nested_list[index][1]:
-    for i in range(idx,index+1):
-        sort.append(str(nested_list[i][0]))
+                v=score[i];
+        if score[idx:idx+1]<score[i:i+1]:
+            index=j  
+if score[idx:idx+1]==score[index-1:index]:
+    for i in range(idx,index):
+        sort.append(str(name[i]))
 else:
-    print(nested_list[idx][0])
+    print(name[idx])
 sort.sort()
 for i in range(len(sort)):
-    print(sort[i],"has the second lowest marks.")
+    print(sort[i]," has the second lowest marks.")
